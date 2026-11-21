@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agile Anti-Pattern &amp; Coaching Script Studio</title>
+  <title>Agile Coaching &amp; Delivery Studio</title>
   <style>
     :root {
       --bg: #0f172a;
@@ -45,9 +45,9 @@
       justify-content: space-between;
       align-items: flex-end;
       gap: 16px;
-      padding-bottom: 20px;
+      padding-bottom: 18px;
       border-bottom: 1px solid var(--border);
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
 
     .badge {
@@ -58,7 +58,7 @@
       text-transform: uppercase;
       color: var(--accent);
       background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      border: 1px solid rgba(56, 189, 248, 0.35);
       padding: 4px 10px;
       border-radius: 999px;
       margin-bottom: 8px;
@@ -81,6 +81,45 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+    }
+
+    .nav-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .tool-tabs {
+      display: flex;
+      gap: 8px;
+      background: var(--surface);
+      padding: 6px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .tool-tab {
+      background: transparent;
+      color: var(--muted);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 7px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tool-tab:hover {
+      color: var(--text);
+    }
+
+    .tool-tab.active {
+      background: var(--accent);
+      color: #062033;
     }
 
     .btn {
@@ -107,7 +146,7 @@
     }
 
     .btn-primary:hover {
-      background: #7dd3fc;
+      opacity: 0.9;
       color: #062033;
     }
 
@@ -144,21 +183,42 @@
       font-weight: 700;
     }
 
+    .branding-drawer {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+    }
+
+    .branding-drawer.open {
+      display: block;
+    }
+
+    .branding-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+      align-items: end;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
     .controls-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 16px;
       margin-bottom: 18px;
-    }
-
-    .control-group label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 8px;
     }
 
     .seg-group {
@@ -259,22 +319,37 @@
     }
 
     .input-field,
-    .select-field {
+    .select-field,
+    .story-textarea {
       background: var(--surface-2);
       color: var(--text);
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 9px 12px;
-      font-size: 13px;
+      font-size: 13.5px;
+      font-family: inherit;
       outline: none;
+      width: 100%;
     }
 
-    .input-field {
+    .custom-form .input-field {
       flex: 1 1 280px;
+      width: auto;
+    }
+
+    .custom-form .select-field {
+      width: auto;
+    }
+
+    .story-textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.5;
     }
 
     .input-field:focus,
-    .select-field:focus {
+    .select-field:focus,
+    .story-textarea:focus {
       border-color: var(--accent);
     }
 
@@ -380,7 +455,7 @@
 
     .exp-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 14px;
       margin-top: 12px;
     }
@@ -405,6 +480,59 @@
       color: #e2e8f0;
     }
 
+    .dor-score-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: #0b1220;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+
+    .dor-big-num {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .dor-check-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 12px;
+      background: var(--surface-2);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      gap: 10px;
+    }
+
+    .status-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .status-pass {
+      background: rgba(52, 211, 153, 0.16);
+      color: var(--good);
+    }
+
+    .status-warn {
+      background: rgba(251, 191, 36, 0.16);
+      color: var(--warn);
+    }
+
+    .status-fail {
+      background: rgba(248, 113, 113, 0.16);
+      color: var(--bad);
+    }
+
     .md-preview {
       width: 100%;
       min-height: 190px;
@@ -425,115 +553,200 @@
       font-size: 13.5px;
       padding: 12px 0;
     }
+
+    .hidden {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <header>
       <div>
-        <span class="badge">Scrum Master Coaching Studio</span>
-        <h1>Agile Anti-Pattern &amp; Coaching Script App</h1>
-        <p class="subtitle">
-          Select or add team symptoms, choose maturity stage and audience, get coaching scripts and a 2-sprint experiment, and export retrospective notes in Markdown.
+        <span class="badge" id="brandBadge">Scrum Master &amp; Delivery Toolkit</span>
+        <h1 id="brandTitle">Agile Coaching &amp; Refinement Studio</h1>
+        <p class="subtitle" id="brandSubtitle">
+          Diagnose team anti-patterns, generate tailored coaching scripts, or slice user stories and audit Definition of Ready live with your squad.
         </p>
       </div>
       <div class="header-actions">
-        <button class="btn btn-emerald" id="exportMdBtn" type="button">Export Retro Markdown</button>
+        <button class="btn" id="toggleBrandBtn" type="button">Customize Branding</button>
+        <button class="btn btn-emerald" id="exportMdBtn" type="button">Copy Markdown</button>
         <button class="btn" id="downloadMdBtn" type="button">Download .md</button>
-        <button class="btn" id="resetBtn" type="button">Reset Selections</button>
       </div>
     </header>
 
-    <section class="panel">
-      <div class="controls-row">
-        <div class="control-group">
-          <label>1. Team Maturity Stage</label>
-          <div class="seg-group" id="maturityGroup">
-            <button class="seg-btn" data-val="forming" type="button">Forming (New)</button>
-            <button class="seg-btn active" data-val="storming" type="button">Storming (Frustrated)</button>
-            <button class="seg-btn" data-val="performing" type="button">Performing (Stagnant)</button>
-          </div>
+    <section class="branding-drawer" id="brandingDrawer">
+      <div class="panel-header" style="margin-bottom: 4px;">
+        <span class="panel-title">Workspace Branding &amp; Theme (Saved in Browser)</span>
+        <button class="btn" id="resetBrandBtn" type="button">Reset Default</button>
+      </div>
+      <div class="branding-grid">
+        <div>
+          <label class="field-label" for="inputBadge">Top Badge / Squad Name</label>
+          <input type="text" id="inputBadge" class="input-field" maxlength="50" />
         </div>
-
-        <div class="control-group">
-          <label>2. Who Are You Coaching?</label>
-          <div class="seg-group" id="audienceGroup">
-            <button class="seg-btn" data-val="developers" type="button">Developers</button>
-            <button class="seg-btn active" data-val="po" type="button">Product Owner</button>
-            <button class="seg-btn" data-val="stakeholders" type="button">Stakeholders</button>
-          </div>
+        <div>
+          <label class="field-label" for="inputTitle">App Title</label>
+          <input type="text" id="inputTitle" class="input-field" maxlength="60" />
+        </div>
+        <div>
+          <label class="field-label" for="inputAccent">Accent Color</label>
+          <select id="inputAccent" class="select-field">
+            <option value="#38bdf8">Sky Blue (Default)</option>
+            <option value="#34d399">Emerald Green</option>
+            <option value="#a78bfa">Violet Purple</option>
+            <option value="#fbbf24">Amber Gold</option>
+            <option value="#fb7185">Coral Rose</option>
+          </select>
+        </div>
+        <div>
+          <button class="btn btn-primary" id="saveBrandBtn" type="button" style="width: 100%;">Save Branding</button>
         </div>
       </div>
-
-      <div class="panel-header" style="margin-bottom: 10px;">
-        <span class="panel-title">3. Select or Add Observed Team Symptoms</span>
-        <span style="font-size: 12.5px; color: var(--muted);" id="selectedCount">2 selected</span>
-      </div>
-
-      <div class="symptoms-grid" id="symptomsGrid"></div>
-
-      <form class="custom-form" id="customSymptomForm">
-        <input
-          type="text"
-          id="customSymptomInput"
-          class="input-field"
-          placeholder="Add a custom symptom (e.g., 'Deployment approvals take 3 days after sprint ends')..."
-          maxlength="160"
-        />
-        <select id="customPillarSelect" class="select-field" aria-label="Primary affected pillar">
-          <option value="adaptation">Focus: Adaptation</option>
-          <option value="transparency">Focus: Transparency</option>
-          <option value="inspection">Focus: Inspection</option>
-          <option value="safety">Focus: Psychological Safety</option>
-        </select>
-        <button type="submit" class="btn btn-primary">+ Add Symptom</button>
-      </form>
     </section>
 
-    <div class="main-grid">
+    <div class="nav-bar">
+      <div class="tool-tabs" role="tablist">
+        <button class="tool-tab active" data-tool="coach" type="button">1. Anti-Pattern &amp; Coaching Studio</button>
+        <button class="tool-tab" data-tool="slicer" type="button">2. Story Slicer &amp; DoR Gatekeeper</button>
+      </div>
+      <button class="btn" id="resetToolBtn" type="button">Reset Current Tool</button>
+    </div>
+
+    <!-- TOOL 1: ANTI-PATTERN & COACHING STUDIO -->
+    <div id="toolCoachView">
+      <section class="panel">
+        <div class="controls-row">
+          <div>
+            <label class="field-label">1. Team Maturity Stage</label>
+            <div class="seg-group" id="maturityGroup">
+              <button class="seg-btn" data-val="forming" type="button">Forming (New)</button>
+              <button class="seg-btn active" data-val="storming" type="button">Storming (Frustrated)</button>
+              <button class="seg-btn" data-val="performing" type="button">Performing (Stagnant)</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="field-label">2. Who Are You Coaching?</label>
+            <div class="seg-group" id="audienceGroup">
+              <button class="seg-btn" data-val="developers" type="button">Developers</button>
+              <button class="seg-btn active" data-val="po" type="button">Product Owner</button>
+              <button class="seg-btn" data-val="stakeholders" type="button">Stakeholders</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel-header" style="margin-bottom: 10px;">
+          <span class="panel-title">3. Select or Add Observed Team Symptoms</span>
+          <span style="font-size: 12.5px; color: var(--muted);" id="selectedCount">2 selected</span>
+        </div>
+
+        <div class="symptoms-grid" id="symptomsGrid"></div>
+
+        <form class="custom-form" id="customSymptomForm">
+          <input
+            type="text"
+            id="customSymptomInput"
+            class="input-field"
+            placeholder="Add a custom symptom (e.g., 'Deployment approvals take 3 days after sprint ends')..."
+            maxlength="160"
+          />
+          <select id="customPillarSelect" class="select-field" aria-label="Primary affected pillar">
+            <option value="adaptation">Focus: Adaptation</option>
+            <option value="transparency">Focus: Transparency</option>
+            <option value="inspection">Focus: Inspection</option>
+            <option value="safety">Focus: Psychological Safety</option>
+          </select>
+          <button type="submit" class="btn btn-primary">+ Add Symptom</button>
+        </form>
+      </section>
+
+      <div class="main-grid">
+        <section class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Agile Pillar Health</span>
+            <span style="font-size: 12px; color: var(--muted);">0–100 Scale</span>
+          </div>
+          <div id="pillarsContainer"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Root-Cause Diagnosis</span>
+            <span style="font-size: 12px; color: var(--muted);">Systemic Patterns</span>
+          </div>
+          <div id="diagnosisContainer"></div>
+        </section>
+      </div>
+
       <section class="panel">
         <div class="panel-header">
-          <span class="panel-title">Agile Pillar Health</span>
-          <span style="font-size: 12px; color: var(--muted);">0–100 Scale</span>
+          <span class="panel-title">Word-for-Word Coaching Script</span>
+          <button class="btn btn-primary" id="copyScriptBtn" type="button">Copy Script</button>
         </div>
-        <div id="pillarsContainer"></div>
+        <div class="script-box" id="scriptContainer"></div>
       </section>
 
       <section class="panel">
         <div class="panel-header">
-          <span class="panel-title">Root-Cause Diagnosis</span>
-          <span style="font-size: 12px; color: var(--muted);">Systemic Patterns</span>
+          <span class="panel-title">2-Sprint Experiment Plan</span>
+          <span style="font-size: 12px; color: var(--muted);">Inspect &amp; Adapt Loop</span>
         </div>
-        <div id="diagnosisContainer"></div>
+        <div class="exp-grid" id="experimentContainer"></div>
       </section>
     </div>
 
-    <section class="panel">
-      <div class="panel-header">
-        <span class="panel-title">Word-for-Word Coaching Script</span>
-        <button class="btn btn-primary" id="copyScriptBtn" type="button">Copy Script</button>
-      </div>
-      <div class="script-box" id="scriptContainer"></div>
-    </section>
+    <!-- TOOL 2: STORY SLICER & DOR GATEKEEPER -->
+    <div id="toolSlicerView" class="hidden">
+      <section class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Paste Raw User Story or Epic for Refinement</span>
+          <button class="btn" id="loadSampleStoryBtn" type="button">Load Sample Bloated Story</button>
+        </div>
+        <textarea
+          id="storyInput"
+          class="story-textarea"
+          placeholder="Paste your Jira/ADO story title, description, and acceptance criteria here..."
+        ></textarea>
+      </section>
 
-    <section class="panel">
-      <div class="panel-header">
-        <span class="panel-title">2-Sprint Experiment Plan</span>
-        <span style="font-size: 12px; color: var(--muted);">Inspect &amp; Adapt Loop</span>
-      </div>
-      <div class="exp-grid" id="experimentContainer"></div>
-    </section>
+      <div class="main-grid">
+        <section class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Definition of Ready (DoR) Audit</span>
+            <span style="font-size: 12px; color: var(--muted);">100-Point Gatekeeper</span>
+          </div>
+          <div id="dorAuditContainer"></div>
+        </section>
 
+        <section class="panel">
+          <div class="panel-header">
+            <span class="panel-title">Vertical Slicing Workshop Patterns</span>
+            <span style="font-size: 12px; color: var(--muted);">Split Without Layers</span>
+          </div>
+          <div id="slicingContainer"></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- SHARED LIVE MARKDOWN EXPORT -->
     <section class="panel">
       <div class="panel-header">
-        <span class="panel-title">Retrospective Notes (Live Markdown Preview)</span>
-        <span style="font-size: 12px; color: var(--muted);">Ready for Confluence / Notion / Teams</span>
+        <span class="panel-title" id="mdSectionTitle">Live Markdown Export (Jira / Confluence / Teams Ready)</span>
+        <span style="font-size: 12px; color: var(--muted);">Auto-updates as you work</span>
       </div>
       <textarea id="mdPreview" class="md-preview" readonly></textarea>
     </section>
   </div>
 
   <script>
+    const DEFAULT_BRANDING = {
+      badge: "Scrum Master & Delivery Toolkit",
+      title: "Agile Coaching & Refinement Studio",
+      accent: "#38bdf8"
+    };
+
     const DEFAULT_SYMPTOMS = [
       {
         id: "standup_status",
@@ -679,12 +892,30 @@
       }
     };
 
+    const SAMPLE_BLOATED_STORY = `Title: Enterprise Invoice Export & Approval Portal\nAs a finance manager and regional admin, I want to filter, preview, bulk-approve, and export invoices to CSV, PDF, and SAP with custom email notifications, audit logs, and role permissions so that month-end closing is fast and seamless.`;
+
     const state = {
+      activeTool: "coach",
       customSymptoms: [],
       selectedIds: ["qa_bottleneck", "scope_creep"],
       maturity: "storming",
-      audience: "po"
+      audience: "po",
+      storyText: SAMPLE_BLOATED_STORY
     };
+
+    const brandBadge = document.getElementById("brandBadge");
+    const brandTitle = document.getElementById("brandTitle");
+    const brandingDrawer = document.getElementById("brandingDrawer");
+    const toggleBrandBtn = document.getElementById("toggleBrandBtn");
+    const saveBrandBtn = document.getElementById("saveBrandBtn");
+    const resetBrandBtn = document.getElementById("resetBrandBtn");
+    const inputBadge = document.getElementById("inputBadge");
+    const inputTitle = document.getElementById("inputTitle");
+    const inputAccent = document.getElementById("inputAccent");
+
+    const toolCoachView = document.getElementById("toolCoachView");
+    const toolSlicerView = document.getElementById("toolSlicerView");
+    const resetToolBtn = document.getElementById("resetToolBtn");
 
     const symptomsGrid = document.getElementById("symptomsGrid");
     const customSymptomForm = document.getElementById("customSymptomForm");
@@ -694,12 +925,68 @@
     const diagnosisContainer = document.getElementById("diagnosisContainer");
     const scriptContainer = document.getElementById("scriptContainer");
     const experimentContainer = document.getElementById("experimentContainer");
-    const mdPreview = document.getElementById("mdPreview");
     const selectedCountEl = document.getElementById("selectedCount");
-    const resetBtn = document.getElementById("resetBtn");
     const copyScriptBtn = document.getElementById("copyScriptBtn");
+
+    const storyInput = document.getElementById("storyInput");
+    const loadSampleStoryBtn = document.getElementById("loadSampleStoryBtn");
+    const dorAuditContainer = document.getElementById("dorAuditContainer");
+    const slicingContainer = document.getElementById("slicingContainer");
+
+    const mdPreview = document.getElementById("mdPreview");
     const exportMdBtn = document.getElementById("exportMdBtn");
     const downloadMdBtn = document.getElementById("downloadMdBtn");
+
+    function loadBranding() {
+      let saved = DEFAULT_BRANDING;
+      try {
+        const raw = localStorage.getItem("agile_studio_branding");
+        if (raw) saved = { ...DEFAULT_BRANDING, ...JSON.parse(raw) };
+      } catch (_) {}
+      applyBranding(saved);
+    }
+
+    function applyBranding(cfg) {
+      brandBadge.textContent = cfg.badge || DEFAULT_BRANDING.badge;
+      brandTitle.textContent = cfg.title || DEFAULT_BRANDING.title;
+      document.title = cfg.title || DEFAULT_BRANDING.title;
+      document.documentElement.style.setProperty("--accent", cfg.accent || DEFAULT_BRANDING.accent);
+      inputBadge.value = cfg.badge || DEFAULT_BRANDING.badge;
+      inputTitle.value = cfg.title || DEFAULT_BRANDING.title;
+      inputAccent.value = cfg.accent || DEFAULT_BRANDING.accent;
+    }
+
+    toggleBrandBtn.addEventListener("click", () => {
+      brandingDrawer.classList.toggle("open");
+    });
+
+    saveBrandBtn.addEventListener("click", () => {
+      const cfg = {
+        badge: inputBadge.value.trim() || DEFAULT_BRANDING.badge,
+        title: inputTitle.value.trim() || DEFAULT_BRANDING.title,
+        accent: inputAccent.value || DEFAULT_BRANDING.accent
+      };
+      applyBranding(cfg);
+      try {
+        localStorage.setItem("agile_studio_branding", JSON.stringify(cfg));
+      } catch (_) {}
+      brandingDrawer.classList.remove("open");
+    });
+
+    resetBrandBtn.addEventListener("click", () => {
+      applyBranding(DEFAULT_BRANDING);
+      try {
+        localStorage.removeItem("agile_studio_branding");
+      } catch (_) {}
+    });
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
 
     function getAllSymptoms() {
       return [...DEFAULT_SYMPTOMS, ...state.customSymptoms];
@@ -739,10 +1026,12 @@
       return totals;
     }
 
-    function renderSymptoms() {
-      const all = getAllSymptoms();
+    function renderCoachTool() {
+      const selectedItems = getAllSymptoms().filter((s) => state.selectedIds.includes(s.id));
+      const totals = computePillars(selectedItems);
+
       symptomsGrid.innerHTML = "";
-      all.forEach((s) => {
+      getAllSymptoms().forEach((s) => {
         const isSelected = state.selectedIds.includes(s.id);
         const btn = document.createElement("div");
         btn.role = "button";
@@ -751,7 +1040,7 @@
         btn.innerHTML = `
           <div class="symptom-top">
             <span class="symptom-tag">${s.tag}${isSelected ? " • Active" : ""}</span>
-            ${s.isCustom ? `<button type="button" class="remove-custom" data-remove="${s.id}" title="Remove custom symptom">✕</button>` : ""}
+            ${s.isCustom ? `<button type="button" class="remove-custom" data-remove="${s.id}" title="Remove">✕</button>` : ""}
           </div>
           <span class="symptom-text">${escapeHtml(s.label)}</span>
         `;
@@ -764,126 +1053,74 @@
             renderAll();
             return;
           }
-          if (state.selectedIds.includes(s.id)) {
-            state.selectedIds = state.selectedIds.filter((id) => id !== s.id);
-          } else {
-            state.selectedIds.push(s.id);
-          }
+          state.selectedIds = isSelected
+            ? state.selectedIds.filter((id) => id !== s.id)
+            : [...state.selectedIds, s.id];
           renderAll();
-        });
-        btn.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            btn.click();
-          }
         });
         symptomsGrid.appendChild(btn);
       });
       selectedCountEl.textContent = `${state.selectedIds.length} selected`;
-    }
 
-    function getBarColor(score) {
-      if (score >= 75) return "var(--good)";
-      if (score >= 50) return "var(--warn)";
-      return "var(--bad)";
-    }
-
-    function renderPillars(totals) {
       const rows = [
         { key: "transparency", label: "Transparency (Shared Visibility)" },
         { key: "inspection", label: "Inspection (Early Risk Spotting)" },
         { key: "adaptation", label: "Adaptation (Pivot & Flow Control)" },
         { key: "safety", label: "Psychological Safety (Candor)" }
       ];
-
       pillarsContainer.innerHTML = rows
         .map((r) => {
           const score = totals[r.key];
+          const color = score >= 75 ? "var(--good)" : score >= 50 ? "var(--warn)" : "var(--bad)";
           return `
             <div class="pillar-item">
-              <div class="pillar-meta">
-                <span>${r.label}</span>
-                <span>${score} / 100</span>
-              </div>
-              <div class="bar-track">
-                <div class="bar-fill" style="width: ${score}%; background: ${getBarColor(score)};"></div>
-              </div>
+              <div class="pillar-meta"><span>${r.label}</span><span>${score} / 100</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:${score}%;background:${color};"></div></div>
             </div>
           `;
         })
         .join("");
-    }
 
-    function renderDiagnosis(selectedItems) {
-      if (selectedItems.length === 0) {
-        diagnosisContainer.innerHTML = `<p class="empty-state">Select or add at least one symptom above to diagnose root-cause anti-patterns.</p>`;
-        return;
-      }
+      diagnosisContainer.innerHTML = selectedItems.length
+        ? selectedItems
+            .slice(0, 3)
+            .map(
+              (item, idx) => `
+              <div class="diagnosis-card ${idx === 0 ? "primary" : ""}">
+                <div class="diagnosis-title">${idx === 0 ? "Primary Anti-Pattern: " : "Contributing Pattern: "}${escapeHtml(item.antiPattern)}</div>
+                <div class="diagnosis-desc">${escapeHtml(item.rootCause)}</div>
+              </div>`
+            )
+            .join("")
+        : `<p class="empty-state">Select or add at least one symptom above to diagnose root-cause anti-patterns.</p>`;
 
-      diagnosisContainer.innerHTML = selectedItems
-        .slice(0, 3)
-        .map((item, idx) => `
-          <div class="diagnosis-card ${idx === 0 ? "primary" : ""}">
-            <div class="diagnosis-title">${idx === 0 ? "Primary Anti-Pattern: " : "Contributing Pattern: "}${escapeHtml(item.antiPattern)}</div>
-            <div class="diagnosis-desc">${escapeHtml(item.rootCause)}</div>
-          </div>
-        `)
-        .join("");
-    }
-
-    function renderScript() {
-      const s = SCRIPTS[state.audience][state.maturity];
+      const sc = SCRIPTS[state.audience][state.maturity];
       scriptContainer.innerHTML = `
         <div class="script-label">What to Say in the Room</div>
-        <div class="script-quote">${escapeHtml(s.say)}</div>
+        <div class="script-quote">${escapeHtml(sc.say)}</div>
         <div class="script-label">Coaching Question to Ask</div>
-        <div class="script-sub">${escapeHtml(s.ask)}</div>
-        <div class="avoid-text">${escapeHtml(s.avoid)}</div>
+        <div class="script-sub">${escapeHtml(sc.ask)}</div>
+        <div class="avoid-text">${escapeHtml(sc.avoid)}</div>
       `;
-    }
 
-    function renderExperiment(selectedItems) {
       if (selectedItems.length === 0) {
         experimentContainer.innerHTML = `<p class="empty-state">Select a symptom to generate a 2-sprint experiment plan.</p>`;
-        return;
+      } else {
+        const primary = selectedItems[0];
+        const secondary = selectedItems[1] || primary;
+        experimentContainer.innerHTML = `
+          <div class="exp-card"><div class="exp-step">Sprint 1 • Immediate Probe</div><div class="exp-body">${escapeHtml(primary.exp1)}</div></div>
+          <div class="exp-card"><div class="exp-step">Sprint 2 • Reinforce &amp; Adapt</div><div class="exp-body">${escapeHtml(secondary.exp2)}</div></div>
+          <div class="exp-card"><div class="exp-step">Success Signal to Inspect</div><div class="exp-body">${escapeHtml(primary.metric)}</div></div>
+        `;
       }
 
-      const primary = selectedItems[0];
-      const secondary = selectedItems[1] || primary;
-
-      experimentContainer.innerHTML = `
-        <div class="exp-card">
-          <div class="exp-step">Sprint 1 • Immediate Probe</div>
-          <div class="exp-body">${escapeHtml(primary.exp1)}</div>
-        </div>
-        <div class="exp-card">
-          <div class="exp-step">Sprint 2 • Reinforce &amp; Adapt</div>
-          <div class="exp-body">${escapeHtml(secondary.exp2)}</div>
-        </div>
-        <div class="exp-card">
-          <div class="exp-step">Success Signal to Inspect</div>
-          <div class="exp-body">${escapeHtml(primary.metric)}</div>
-        </div>
-      `;
-    }
-
-    function generateRetroMarkdown(selectedItems, totals) {
       const dateStr = new Date().toISOString().slice(0, 10);
-      const s = SCRIPTS[state.audience][state.maturity];
-      const primary = selectedItems[0];
-      const secondary = selectedItems[1] || primary;
-
       const symptomLines = selectedItems.length
         ? selectedItems.map((i) => `- **${i.label}** *(${i.tag})* — ${i.antiPattern}`).join("\n")
         : "- *No symptoms selected*";
-
-      const expSection = primary
-        ? [
-            `- **Sprint 1 (Immediate Probe):** ${primary.exp1}`,
-            `- **Sprint 2 (Reinforce & Adapt):** ${secondary.exp2}`,
-            `- **Success Signal:** ${primary.metric}`
-          ].join("\n")
-        : "- *Select a symptom to generate an experiment.*";
+      const primary = selectedItems[0];
+      const secondary = selectedItems[1] || primary;
 
       return [
         `# Sprint Retrospective & Coaching Notes (${dateStr})`,
@@ -895,41 +1132,179 @@
         symptomLines,
         ``,
         `## Agile Pillar Health (0–100)`,
-        `- **Transparency:** ${totals.transparency}/100`,
-        `- **Inspection:** ${totals.inspection}/100`,
-        `- **Adaptation:** ${totals.adaptation}/100`,
-        `- **Psychological Safety:** ${totals.safety}/100`,
+        `- **Transparency:** ${totals.transparency}/100 | **Inspection:** ${totals.inspection}/100 | **Adaptation:** ${totals.adaptation}/100 | **Safety:** ${totals.safety}/100`,
         ``,
         `## Coaching Script`,
-        `> **Say:** ${s.say}`,
-        `>`,
-        `> **Ask:** ${s.ask}`,
-        ``,
-        `- *${s.avoid}*`,
+        `> **Say:** ${sc.say}`,
+        `> **Ask:** ${sc.ask}`,
+        `- *${sc.avoid}*`,
         ``,
         `## 2-Sprint Experiment Plan`,
-        expSection
+        primary
+          ? `- **Sprint 1:** ${primary.exp1}\n- **Sprint 2:** ${secondary.exp2}\n- **Success Signal:** ${primary.metric}`
+          : `- *Select a symptom to generate an experiment.*`
       ].join("\n");
     }
 
-    function escapeHtml(str) {
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
+    function renderSlicerTool() {
+      const text = state.storyText.trim();
+      const lower = text.toLowerCase();
+
+      if (!text) {
+        dorAuditContainer.innerHTML = `<p class="empty-state">Paste a user story above to run the Definition of Ready check.</p>`;
+        slicingContainer.innerHTML = `<p class="empty-state">Paste a feature or story above to see vertical slicing options.</p>`;
+        return `# Story Refinement & Slicing Notes\n\n*Paste a story above to generate notes.*`;
+      }
+
+      const hasPersona = /\bas a\b|\bas an\b|\buser\b|\badmin\b|\bcustomer\b|\bmanager\b/.test(lower);
+      const hasValue = /\bso that\b|\bin order to\b|\bvalue\b|\bbenefit\b/.test(lower);
+      const hasAC = /\bgiven\b|\bwhen\b|\bthen\b|\bacceptance criteria\b|\bmust\b|\bshould\b/.test(lower);
+      const hasOutOfScope = /\bout of scope\b|\bexclude\b|\bnot included\b|\bphase 2\b/.test(lower);
+      const hasVagueWords = /\bfast\b|\bseamless\b|\beasy\b|\buser-friendly\b|\betc\b|\band more\b/.test(lower);
+      const commaAndCount = (lower.match(/\band\b|,/g) || []).length;
+      const isRightSized = text.length < 320 && commaAndCount <= 4;
+
+      const checks = [
+        {
+          name: "1. Clear Persona & User Value (25 pts)",
+          pts: hasPersona && hasValue ? 25 : hasPersona || hasValue ? 15 : 0,
+          max: 25,
+          status: hasPersona && hasValue ? "pass" : hasPersona || hasValue ? "warn" : "fail",
+          label: hasPersona && hasValue ? "Pass" : "Needs 'As a... So that...'"
+        },
+        {
+          name: "2. Testable Acceptance Criteria (25 pts)",
+          pts: hasAC ? 25 : 5,
+          max: 25,
+          status: hasAC ? "pass" : "fail",
+          label: hasAC ? "Criteria Detected" : "Missing Given/When/Then"
+        },
+        {
+          name: "3. Explicit Out-of-Scope Boundaries (20 pts)",
+          pts: hasOutOfScope ? 20 : 0,
+          max: 20,
+          status: hasOutOfScope ? "pass" : "warn",
+          label: hasOutOfScope ? "Bounded" : "Add 'Out of Scope'"
+        },
+        {
+          name: "4. Unambiguous Language (15 pts)",
+          pts: !hasVagueWords ? 15 : 5,
+          max: 15,
+          status: !hasVagueWords ? "pass" : "warn",
+          label: !hasVagueWords ? "Specific" : "Vague terms ('fast/seamless')"
+        },
+        {
+          name: "5. Single-Sprint Vertical Size (15 pts)",
+          pts: isRightSized ? 15 : 5,
+          max: 15,
+          status: isRightSized ? "pass" : "fail",
+          label: isRightSized ? "Right-Sized" : "Oversized — Split Recommended"
+        }
+      ];
+
+      const totalScore = checks.reduce((sum, c) => sum + c.pts, 0);
+      const verdictColor = totalScore >= 80 ? "var(--good)" : totalScore >= 55 ? "var(--warn)" : "var(--bad)";
+      const verdictText =
+        totalScore >= 80
+          ? "Ready for Sprint Planning"
+          : totalScore >= 55
+          ? "Needs 5-Min PO Clarification"
+          : "Too Big / Ambiguous — Split Before Pulling";
+
+      dorAuditContainer.innerHTML = `
+        <div class="dor-score-banner">
+          <div>
+            <div style="font-size:12px;color:var(--muted);text-transform:uppercase;font-weight:700;">Readiness Score</div>
+            <div style="font-size:14px;font-weight:600;color:${verdictColor};margin-top:2px;">${verdictText}</div>
+          </div>
+          <div class="dor-big-num" style="color:${verdictColor};">${totalScore}<span style="font-size:15px;color:var(--muted);">/100</span></div>
+        </div>
+        ${checks
+          .map(
+            (c) => `
+            <div class="dor-check-row">
+              <span>${c.name}</span>
+              <span class="status-pill status-${c.status}">${c.label}</span>
+            </div>`
+          )
+          .join("")}
+      `;
+
+      const slices = [
+        {
+          title: "Slice 1 • Core Happy Path (MVP)",
+          desc: "Deliver the primary end-to-end action for a single user role with standard valid inputs—defer bulk actions, custom formatting, and secondary exports."
+        },
+        {
+          title: "Slice 2 • Data / Format Variations",
+          desc: "If the story mentions multiple formats or integrations (e.g., CSV vs. PDF vs. ERP sync), ship one format first and split additional formats into fast-follow stories."
+        },
+        {
+          title: "Slice 3 • Roles, Permissions & Audit Logs",
+          desc: "Ship basic authenticated access first; separate granular admin permissions, approval workflows, and compliance audit trails into a dedicated story."
+        },
+        {
+          title: "Slice 4 • Edge Cases, Retries & Notifications",
+          desc: "Separate automated email alerts, empty-state polish, and complex failure retries once the core workflow is validated by the Product Owner."
+        }
+      ];
+
+      slicingContainer.innerHTML = slices
+        .map(
+          (sl) => `
+          <div class="diagnosis-card">
+            <div class="diagnosis-title">${sl.title}</div>
+            <div class="diagnosis-desc">${sl.desc}</div>
+          </div>`
+        )
+        .join("");
+
+      return [
+        `# Backlog Refinement & Slicing Notes`,
+        ``,
+        `- **Definition of Ready Score:** ${totalScore}/100 (${verdictText})`,
+        ``,
+        `## Original Story`,
+        `> ${text.replace(/\n/g, "\n> ")}`,
+        ``,
+        `## DoR Gatekeeper Findings`,
+        ...checks.map((c) => `- **${c.name}:** ${c.label}`),
+        ``,
+        `## Recommended Vertical Slices`,
+        ...slices.map((sl) => `- **${sl.title}:** ${sl.desc}`)
+      ].join("\n");
     }
 
     function renderAll() {
-      const selectedItems = getAllSymptoms().filter((s) => state.selectedIds.includes(s.id));
-      const totals = computePillars(selectedItems);
-      renderSymptoms();
-      renderPillars(totals);
-      renderDiagnosis(selectedItems);
-      renderScript();
-      renderExperiment(selectedItems);
-      mdPreview.value = generateRetroMarkdown(selectedItems, totals);
+      if (state.activeTool === "coach") {
+        toolCoachView.classList.remove("hidden");
+        toolSlicerView.classList.add("hidden");
+        mdPreview.value = renderCoachTool();
+      } else {
+        toolCoachView.classList.add("hidden");
+        toolSlicerView.classList.remove("hidden");
+        mdPreview.value = renderSlicerTool();
+      }
     }
+
+    document.querySelectorAll(".tool-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".tool-tab").forEach((t) => t.classList.remove("active"));
+        tab.classList.add("active");
+        state.activeTool = tab.dataset.tool;
+        renderAll();
+      });
+    });
+
+    resetToolBtn.addEventListener("click", () => {
+      if (state.activeTool === "coach") {
+        state.selectedIds = [];
+      } else {
+        state.storyText = "";
+        storyInput.value = "";
+      }
+      renderAll();
+    });
 
     customSymptomForm.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -960,39 +1335,44 @@
       });
     });
 
-    resetBtn.addEventListener("click", () => {
-      state.selectedIds = [];
-      renderAll();
-    });
-
     copyScriptBtn.addEventListener("click", () => {
       const s = SCRIPTS[state.audience][state.maturity];
       const textToCopy = `Coaching Script (${state.audience.toUpperCase()} | ${state.maturity.toUpperCase()})\n\nSay: ${s.say}\n\nAsk: ${s.ask}\n\n${s.avoid}`;
       navigator.clipboard?.writeText(textToCopy);
       copyScriptBtn.textContent = "Copied!";
-      setTimeout(() => {
-        copyScriptBtn.textContent = "Copy Script";
-      }, 1500);
+      setTimeout(() => (copyScriptBtn.textContent = "Copy Script"), 1500);
+    });
+
+    storyInput.value = state.storyText;
+    storyInput.addEventListener("input", () => {
+      state.storyText = storyInput.value;
+      renderAll();
+    });
+
+    loadSampleStoryBtn.addEventListener("click", () => {
+      state.storyText = SAMPLE_BLOATED_STORY;
+      storyInput.value = SAMPLE_BLOATED_STORY;
+      renderAll();
     });
 
     exportMdBtn.addEventListener("click", () => {
       navigator.clipboard?.writeText(mdPreview.value);
       exportMdBtn.textContent = "Markdown Copied!";
-      setTimeout(() => {
-        exportMdBtn.textContent = "Export Retro Markdown";
-      }, 1500);
+      setTimeout(() => (exportMdBtn.textContent = "Copy Markdown"), 1500);
     });
 
     downloadMdBtn.addEventListener("click", () => {
+      const prefix = state.activeTool === "coach" ? "retro-coaching" : "story-refinement";
       const blob = new Blob([mdPreview.value], { type: "text/markdown;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `retro-coaching-notes-${new Date().toISOString().slice(0, 10)}.md`;
+      a.download = `${prefix}-${new Date().toISOString().slice(0, 10)}.md`;
       a.click();
       URL.revokeObjectURL(url);
     });
 
+    loadBranding();
     renderAll();
   </script>
 </body>
